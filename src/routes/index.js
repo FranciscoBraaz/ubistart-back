@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
   res.json({ message: "Bem vindo!" });
 });
 
-router.get("/get-items", FormController.getItems);
+router.get("/get-items/?:page", FormController.getFormItems);
+router.post("/create-item", FormController.createItem);
 
 export default router;

@@ -52,12 +52,12 @@ export async function getItemByCep(cep) {
   }
 }
 
-export async function getItems({ page = 1, limit = 10 }) {
+export async function getItems({ page = 1, limit = 5 }) {
   try {
     const formItems = await FormItem.find()
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec();
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip((page - 1) * limit);
     const count = await FormItem.countDocuments();
 
     return {

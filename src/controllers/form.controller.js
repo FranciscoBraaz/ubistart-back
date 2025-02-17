@@ -43,13 +43,15 @@ export async function createItem(req, res) {
   }
 }
 
-export function getFormItems(req, res) {
+export async function getFormItems(req, res) {
   try {
-    const { page = 1 } = req.query;
+    const { page = 1 } = req.params;
 
-    const { formItems, totalPages, currentPage } = getItems({ page });
+    const { formItems, totalPages, currentPage } = await getItems({
+      page: Number(page),
+    });
 
-    res.json({ formItems, totalPages, currentPage });
+    res.status(200).json({ formItems, totalPages, currentPage });
   } catch (error) {
     console.warn(error);
     res.status(500).json({ message: "Houve um erro interno no servidor" });

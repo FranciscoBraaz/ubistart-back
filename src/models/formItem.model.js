@@ -32,6 +32,21 @@ export async function create({ name, email, cep }) {
   }
 }
 
+export async function update(updatedFields, itemId) {
+  try {
+    const updatedItem = await FormItem.findOneAndUpdate(
+      { _id: itemId },
+      { $set: updatedFields },
+      { new: true }
+    );
+
+    return updatedItem;
+  } catch (error) {
+    console.warn("DB - Erro ao editar item:", error);
+    throw new Error(error);
+  }
+}
+
 export async function getItemByEmail(email) {
   try {
     const formItem = await FormItem.findOne({ email });

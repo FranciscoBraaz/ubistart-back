@@ -9,5 +9,6 @@ router.get("/", (req, res) => {
 
 router.get("/get-items/?:page", FormController.getFormItems);
 router.post("/create-item", FormController.createItem);
+router.put("/edit-item", FormController.editItem);
 
 export default router;
